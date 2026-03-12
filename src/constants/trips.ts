@@ -33,6 +33,7 @@ export interface Trip {
     name: string;
     phone: string;
   };
+  itineraryUrl?: string;
   note?: string;
 }
 
@@ -148,6 +149,7 @@ export const TRIPS: Trip[] = [
     month: 5,
     budgetVal: 11,
     budgetLabel: '9 - 12 củ',
+    itineraryUrl: 'https://docs.google.com/document/d/1RmsE0rbc2nFnoGWBrAyll0yJ9zADdy_r/edit?usp=sharing&ouid=112868981147552264639&rtpof=true&sd=true',
     description: 'Kiệt sức vì deadline? Bali chữa lành cho bạn. Ăn ngon giữa ruộng bậc thang Ubud, cầu nguyện tại đền thiêng, và yêu lấy chính mình trước khi quay về chiến đấu. Một hành trình để thực sự Hồi Sinh ✨. Dự kiến tháng 5, 5 ngày 4 đêm.',
     image: '/images/Bali.webp',
     badge: 'SOUL CARE',
@@ -157,6 +159,48 @@ export const TRIPS: Trip[] = [
     contact: {
       name: 'chị My',
       phone: '0913961048'
+    }
+  },
+  {
+    id: '7',
+    team: 'Team AS10-LS1',
+    title: 'Busan – Seoul – Incheon',
+    location: 'Hàn Quốc',
+    duration: 'Tháng 5 (6N5Đ)',
+    month: 5,
+    budgetVal: 16.5,
+    budgetLabel: '16 củ 5',
+    itineraryUrl: 'https://drive.google.com/file/d/1edzWsUEr6iZMuNvq5O7yFi69wD1rM9Qn/view?usp=sharing',
+    description: 'Khám phá xứ sở Kim Chi từ Busan năng động đến Seoul rực rỡ và Incheon hiện đại. Một hành trình 6 ngày 5 đêm trọn vẹn văn hóa, ẩm thực và mua sắm dành cho các tín đồ K-Culture!',
+    image: '/images/Busan.webp',
+    badge: 'K-STYLE',
+    badgeType: 'yellow',
+    organizerIcon: Map,
+    cardTheme: 'white',
+    contact: {
+      name: 'Lưu Hương Ly',
+      phone: '0853081730'
+    }
+  },
+  {
+    id: '8',
+    team: 'Team AS10-LS1-AS3',
+    title: 'Miền Tây Nam Bộ – Tây Ninh – Sài Gòn',
+    location: 'Miền Tây – Tây Ninh – Sài Gòn',
+    duration: 'Khởi hành 12/5 (5N4Đ)',
+    month: 5,
+    budgetVal: 9.7,
+    budgetLabel: '9 củ 7',
+    itineraryUrl: 'https://docs.google.com/document/d/1-zkJSTOqmhfO2f6iKi-4NM2KUpNqou6G/edit',
+    description: 'Hành trình phương Nam rực rỡ: Từ vùng đất thánh Tây Ninh đến sông nước Miền Tây hữu tình và Sài Gòn sôi động. Chốt hạ 9 củ 7 cho 5 ngày 4 đêm ngập tràn tiếng cười và đặc sản!',
+    image: '/images/Miền Tây.webp',
+    badge: 'VIBE PHƯƠNG NAM',
+    badgeType: 'red',
+    organizerIcon: Anchor,
+    cardTheme: 'white',
+    contact: {
+      name: 'Đang cập nhật',
+      phone: '0978606297'
     }
   }
 ];

@@ -15,7 +15,8 @@ import {
   ArrowRight,
   Info,
   FileText,
-  Youtube
+  Youtube,
+  Plane
 } from 'lucide-react';
 import { TRIPS, Trip } from '@/constants/trips';
 
@@ -24,6 +25,12 @@ export default function Home() {
   const [monthFilter, setMonthFilter] = useState<number | 'all'>('all');
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const filteredTrips = TRIPS.filter(trip => {
     const matchesSearch = trip.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -41,7 +48,27 @@ export default function Home() {
   });
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-bg-light">
+    <div className="min-h-screen flex flex-col font-sans bg-bg-light relative overflow-hidden">
+      {/* Plane Reveal Overlay */}
+      <AnimatePresence>
+        {!isLoaded && (
+          <motion.div 
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="fixed inset-0 z-[100] bg-primary flex items-center justify-center pointer-events-none"
+          >
+            <motion.div
+              initial={{ x: '-150%' }}
+              animate={{ x: '150%' }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="flex items-center gap-4"
+            >
+              <div className="w-40 h-[4px] bg-white rounded-full opacity-50"></div>
+              <Plane className="w-20 h-20 text-white fill-white rotate-90" />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b-4 border-charcoal px-6 md:px-12 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -90,9 +117,42 @@ export default function Home() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-8xl font-black leading-[0.85] tracking-tighter text-charcoal uppercase italic"
+              className="text-5xl md:text-8xl font-black leading-[0.85] tracking-tighter text-charcoal uppercase italic flex flex-wrap"
             >
-              HÀNH TRÌNH MÙA HÈ <br/> <span className="text-primary">CHÂN ÁI</span>
+              {/* Wavy Title Effect */}
+              {"HÀNH TRÌNH MÙA HÈ".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  whileHover={{ 
+                    y: -15, 
+                    rotate: i % 2 === 0 ? 5 : -5,
+                    color: "#f49d25"
+                  }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  className="inline-block cursor-default"
+                  style={{ marginRight: char === " " ? "0.3em" : "0" }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+              <br/> 
+              <span className="text-primary flex flex-wrap">
+                {"CHÂN ÁI".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    whileHover={{ 
+                      y: -15, 
+                      rotate: i % 2 === 0 ? -5 : 5,
+                      color: "#181511"
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    className="inline-block cursor-default"
+                    style={{ marginRight: char === " " ? "0.3em" : "0" }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
             </motion.h1>
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
@@ -381,10 +441,22 @@ function TripModal({ trip, onClose }: { trip: Trip; onClose: () => void }) {
               <p className="text-[10px] font-black uppercase opacity-40 leading-none mb-1">Ban tổ chức</p>
               <p className="font-black uppercase">{trip.team}</p>
             </div>
-            <button className="flex items-center gap-2 bg-white px-4 py-2 border-2 border-charcoal rounded-xl font-black text-[10px] uppercase poster-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all cursor-pointer flex-shrink-0">
-              <FileText className="w-4 h-4" />
-              Lịch trình
-            </button>
+            {trip.itineraryUrl ? (
+              <a 
+                href={trip.itineraryUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-white px-4 py-2 border-2 border-charcoal rounded-xl font-black text-[10px] uppercase poster-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all cursor-pointer flex-shrink-0"
+              >
+                <FileText className="w-4 h-4" />
+                Lịch trình
+              </a>
+            ) : (
+              <button className="flex items-center gap-2 bg-white px-4 py-2 border-2 border-charcoal rounded-xl font-black text-[10px] uppercase opacity-50 cursor-not-allowed flex-shrink-0">
+                <FileText className="w-4 h-4" />
+                Lịch trình
+              </button>
+            )}
           </div>
 
           {/* Contact Info */}
