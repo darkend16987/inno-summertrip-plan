@@ -91,7 +91,7 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="text-5xl md:text-8xl font-black leading-[0.85] tracking-tighter text-charcoal uppercase italic"
             >
-              TRÌNH LÀNG HÀNH TRÌNH <br/> <span className="text-primary">CHÂN ÁI</span>
+              HÀNH TRÌNH MÙA HÈ <br/> <span className="text-primary">CHÂN ÁI</span>
             </motion.h1>
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
@@ -110,8 +110,7 @@ export default function Home() {
             className="lg:col-span-4"
           >
             <div className="bg-primary p-6 rounded-2xl border-4 border-charcoal poster-shadow hover-tilt">
-              <p className="text-dark-grey font-black uppercase text-[10px] mb-2 opacity-60 tracking-widest">Team Slogan</p>
-              <p className="text-xl font-black leading-tight italic">"Sống chất, chơi hết mình cùng đồng đội, kiến tạo những mùa hè không bao giờ quên."</p>
+              <p className="text-xl font-black leading-tight italic">"Làm hết sức, chơi hết mình — Live, Eat & Play cùng INNO SUMMER TRIP!" 🌴</p>
             </div>
           </motion.div>
         </section>
@@ -149,9 +148,9 @@ export default function Home() {
                     <button 
                       key={m}
                       onClick={() => setMonthFilter(m as any)}
-                      className={`w-8 h-8 flex items-center justify-center rounded-lg border-2 border-charcoal font-black text-[10px] transition-all cursor-pointer ${monthFilter === m ? 'bg-charcoal text-white shadow-none translate-x-0.5 translate-y-0.5' : 'bg-white hover:bg-primary'}`}
+                      className={`px-2 h-8 flex items-center justify-center rounded-lg border-2 border-charcoal font-black text-[10px] transition-all cursor-pointer ${monthFilter === m ? 'bg-charcoal text-white shadow-none translate-x-0.5 translate-y-0.5' : 'bg-white hover:bg-primary'}`}
                     >
-                      {m === 'all' ? 'Tất cả' : m}
+                      {m === 'all' ? 'All' : `T.${m}`}
                     </button>
                   ))}
                 </div>
@@ -253,8 +252,8 @@ function TripCard({ trip, index, onSelect }: { trip: Trip; index: number; onSele
           <div className="flex flex-col gap-1">
             <div className="flex justify-between items-start">
               <h3 className="text-2xl font-black uppercase leading-none italic">{trip.title}</h3>
-              <div className="bg-primary px-3 py-1 border-2 border-charcoal rounded-md -rotate-3 transition-transform group-hover:rotate-0">
-                <span className="text-sm font-black italic">{trip.budgetLabel}</span>
+              <div className="bg-primary px-3 py-1 border-2 border-charcoal rounded-md -rotate-3 transition-transform group-hover:rotate-0 flex-shrink-0">
+                <span className="text-sm font-black italic whitespace-nowrap">{trip.budgetLabel}</span>
               </div>
             </div>
             <div className="flex items-center gap-1.5 opacity-50">
@@ -354,12 +353,39 @@ function TripModal({ trip, onClose }: { trip: Trip; onClose: () => void }) {
           </div>
 
           <div className="bg-white p-6 border-2 border-charcoal rounded-xl flex items-center gap-4">
-            <div className="w-12 h-12 bg-primary/20 rounded-full border-2 border-charcoal flex items-center justify-center">
+            <div className="w-12 h-12 bg-primary/20 rounded-full border-2 border-charcoal flex items-center justify-center flex-shrink-0">
               <Icon className="w-6 h-6 text-charcoal" />
             </div>
-            <div>
+            <div className="flex-1 min-w-0">
               <p className="text-[10px] font-black uppercase opacity-40 leading-none mb-1">Ban tổ chức</p>
               <p className="font-black uppercase">{trip.team}</p>
+            </div>
+          </div>
+
+          {/* Contact Info */}
+          <div className="bg-charcoal text-white p-6 border-2 border-charcoal rounded-xl">
+            <p className="text-[10px] font-black uppercase opacity-50 leading-none mb-3 tracking-widest">Liên hệ để đăng ký</p>
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <p className="font-black text-lg leading-none">{trip.contact.name}</p>
+                <p className="text-primary font-black text-xl mt-1">{trip.contact.phone}</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <a 
+                  href={`tel:${trip.contact.phone}`}
+                  className="bg-primary text-charcoal px-4 py-2 rounded-xl border-2 border-white/20 font-black text-[11px] uppercase text-center hover:scale-105 transition-all"
+                >
+                  📞 Gọi ngay
+                </a>
+                <a 
+                  href={`https://zalo.me/${trip.contact.phone}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 text-white px-4 py-2 rounded-xl border-2 border-white/20 font-black text-[11px] uppercase text-center hover:bg-white/20 transition-all"
+                >
+                  💬 Zalo
+                </a>
+              </div>
             </div>
           </div>
 
