@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f8f7f5;
+  --foreground: #1a1a1a;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.neo-shadow {
+  box-shadow: 4px 4px 0px 0px #1a1a1a;
+}
+
+.neo-shadow-lg {
+  box-shadow: 8px 8px 0px 0px #1a1a1a;
+}
+
+.neo-shadow-xl {
+  box-shadow: 12px 12px 0px 0px #1a1a1a;
+}
+
+.neo-border {
+  border: 3px solid #1a1a1a;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.entrance-anim {
+  animation: fadeInUp 0.8s ease forwards;
+}
