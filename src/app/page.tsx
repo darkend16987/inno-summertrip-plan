@@ -14,7 +14,8 @@ import {
   Wallet,
   ArrowRight,
   Info,
-  FileText
+  FileText,
+  Youtube
 } from 'lucide-react';
 import { TRIPS, Trip } from '@/constants/trips';
 
@@ -189,21 +190,41 @@ export default function Home() {
       {/* Footer */}
       <footer className="mt-20 border-t-4 border-charcoal bg-charcoal text-white px-6 md:px-12 py-16">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-          <div className="flex items-center gap-3">
-            <div className="bg-primary p-2 border-2 border-white rounded-lg">
-              <Bolt className="w-6 h-6 text-charcoal fill-charcoal" />
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="bg-white/10 p-3 border-2 border-white/20 rounded-xl backdrop-blur-sm">
+              <img 
+                src="/images/Logo.png" 
+                alt="Inno Logo White" 
+                className="h-10 w-auto object-contain brightness-0 invert" 
+              />
             </div>
-            <h2 className="text-2xl font-black tracking-tighter uppercase italic">
-              INNO <span className="text-primary">TRIP</span>
-            </h2>
+            <div className="text-center md:text-left">
+              <p className="text-primary font-black uppercase text-[10px] tracking-widest mb-1">Fuel Your Soul</p>
+              <p className="text-xl font-black italic border-l-4 border-primary pl-4 py-1">
+                "Work Hard, Play Harder — Fuel Your Soul with INNO Summer Adventures!" 🚀
+              </p>
+            </div>
           </div>
           
-          <div className="text-center md:text-right space-y-2">
+          <div className="text-center md:text-right space-y-4">
             <p className="opacity-40 text-[10px] font-bold uppercase tracking-[0.4em]">Designed by Inno Design Team © 2026</p>
-            <div className="flex gap-6 justify-center md:justify-end text-[10px] font-black uppercase tracking-widest text-primary">
-              <a href="#" className="hover:underline">Facebook</a>
-              <a href="#" className="hover:underline">Instagram</a>
-              <a href="#" className="hover:underline">Slack</a>
+            <div className="flex gap-4 justify-center md:justify-end">
+              <a 
+                href="https://www.facebook.com/groups/congdonginno" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-white/10 p-3 rounded-xl border-2 border-white/10 hover:bg-primary hover:text-charcoal hover:scale-110 transition-all group"
+              >
+                <Globe className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@innojsctv" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-white/10 p-3 rounded-xl border-2 border-white/10 hover:bg-accent-red hover:border-accent-red hover:scale-110 transition-all group"
+              >
+                <Youtube className="w-5 h-5 group-hover:scale-125 transition-transform" />
+              </a>
             </div>
           </div>
         </div>
