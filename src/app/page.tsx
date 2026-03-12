@@ -65,7 +65,7 @@ export default function Home() {
             >
               <div className="flex items-center gap-4">
                 <div className="w-40 h-[4px] bg-white rounded-full opacity-30"></div>
-                <Plane className="w-24 h-24 text-white fill-white rotate-90" />
+                <Plane className="w-24 h-24 text-white fill-white rotate-45" />
               </div>
               <img 
                 src="/images/Logo.png" 
@@ -124,10 +124,10 @@ export default function Home() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-8xl font-black uppercase italic flex flex-col gap-2 md:gap-4"
+              className="text-5xl md:text-8xl font-black uppercase italic flex flex-col gap-1 md:gap-2.5"
             >
               {/* Line 1: HÀNH TRÌNH MÙA HÈ */}
-              <div className="flex flex-wrap text-charcoal leading-[1.2]">
+              <div className="flex flex-wrap text-charcoal leading-[1.1]">
                 {"HÀNH TRÌNH MÙA HÈ".split(" ").map((word, wordIdx, words) => (
                   <span key={wordIdx} className="inline-flex whitespace-nowrap">
                     {word.split("").map((char, i) => (
@@ -150,7 +150,7 @@ export default function Home() {
               </div>
 
               {/* Line 2: CHÂN ÁI */}
-              <div className="flex flex-wrap text-primary leading-[1.2]">
+              <div className="flex flex-wrap text-primary leading-[1.1]">
                 {"CHÂN ÁI".split(" ").map((word, wordIdx, words) => (
                   <span key={wordIdx} className="inline-flex whitespace-nowrap">
                     {word.split("").map((char, i) => (
