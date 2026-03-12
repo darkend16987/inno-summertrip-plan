@@ -124,11 +124,11 @@ export default function Home() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-8xl font-black uppercase italic flex flex-col gap-1 md:gap-2.5"
+              className="text-5xl md:text-8xl font-black uppercase italic flex flex-col gap-0 md:gap-1"
             >
-              {/* Line 1: HÀNH TRÌNH MÙA HÈ */}
-              <div className="flex flex-wrap text-charcoal leading-[1.1]">
-                {"HÀNH TRÌNH MÙA HÈ".split(" ").map((word, wordIdx, words) => (
+              {/* Line 1: HÀNH TRÌNH */}
+              <div className="flex flex-wrap text-charcoal leading-[0.9]">
+                {"HÀNH TRÌNH".split(" ").map((word, wordIdx, words) => (
                   <span key={wordIdx} className="inline-flex whitespace-nowrap">
                     {word.split("").map((char, i) => (
                       <motion.span
@@ -149,8 +149,31 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* Line 2: CHÂN ÁI */}
-              <div className="flex flex-wrap text-primary leading-[1.1]">
+              {/* Line 2: MÙA HÈ */}
+              <div className="flex flex-wrap text-charcoal leading-[0.9]">
+                {"MÙA HÈ".split(" ").map((word, wordIdx, words) => (
+                  <span key={wordIdx} className="inline-flex whitespace-nowrap">
+                    {word.split("").map((char, i) => (
+                      <motion.span
+                        key={i}
+                        whileHover={{ 
+                          y: -15, 
+                          rotate: i % 2 === 0 ? 5 : -5,
+                          color: "#f49d25"
+                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        className="inline-block cursor-default"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                    {wordIdx < words.length - 1 && <span className="w-[0.3em]"></span>}
+                  </span>
+                ))}
+              </div>
+
+              {/* Line 3: CHÂN ÁI */}
+              <div className="flex flex-wrap text-primary leading-[0.9]">
                 {"CHÂN ÁI".split(" ").map((word, wordIdx, words) => (
                   <span key={wordIdx} className="inline-flex whitespace-nowrap">
                     {word.split("").map((char, i) => (
