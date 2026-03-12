@@ -13,7 +13,8 @@ import {
   Calendar,
   Wallet,
   ArrowRight,
-  Info
+  Info,
+  FileText
 } from 'lucide-react';
 import { TRIPS, Trip } from '@/constants/trips';
 
@@ -46,15 +47,12 @@ export default function Home() {
           <div className="flex items-center gap-4">
             {/* Company Logo */}
             <img
-              src="/images/logo.png"
+              src="/images/Logo.png"
               alt="Inno Logo"
-              className="h-12 w-auto object-contain"
+              className="h-10 w-auto object-contain"
             />
-            <div>
-              <h1 className="text-xl font-black tracking-tighter uppercase italic leading-none">
-                INNO <span className="text-primary">TRIP</span>
-              </h1>
-              <p className="text-[8px] font-bold uppercase tracking-[0.2em] opacity-40">Summer Plan Portal</p>
+            <div className="border-l-2 border-charcoal/10 pl-4 py-1">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60">OUR SUMMER PLAN PORTAL</p>
             </div>
           </div>
           
@@ -362,6 +360,10 @@ function TripModal({ trip, onClose }: { trip: Trip; onClose: () => void }) {
               <p className="text-[10px] font-black uppercase opacity-40 leading-none mb-1">Ban tổ chức</p>
               <p className="font-black uppercase">{trip.team}</p>
             </div>
+            <button className="flex items-center gap-2 bg-white px-4 py-2 border-2 border-charcoal rounded-xl font-black text-[10px] uppercase poster-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all cursor-pointer flex-shrink-0">
+              <FileText className="w-4 h-4" />
+              Lịch trình
+            </button>
           </div>
 
           {/* Contact Info */}
