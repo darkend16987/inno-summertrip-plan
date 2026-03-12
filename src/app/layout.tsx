@@ -4,6 +4,21 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "INNO SUMMER TRIP - Race to Adventure",
   description: "Official portal for energy-filled summer trips for Inno team.",
+  icons: {
+    icon: "/images/favicon.ico",
+  },
+  openGraph: {
+    title: "INNO SUMMER TRIP - Race to Adventure",
+    description: "Official portal for energy-filled summer trips for Inno team.",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "INNO SUMMER TRIP",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
