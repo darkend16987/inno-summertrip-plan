@@ -58,14 +58,14 @@ export default function Home() {
             className="fixed inset-0 z-[100] bg-primary flex items-center justify-center pointer-events-none"
           >
             <motion.div
-              initial={{ x: '-150%', y: '50%' }}
-              animate={{ x: '150%', y: '-50%' }}
+              initial={{ x: '-150%', y: '0%' }}
+              animate={{ x: '150%', y: '0%' }}
               transition={{ duration: 1.8, ease: "easeInOut" }}
               className="flex flex-col items-center gap-6"
             >
               <div className="flex items-center gap-4">
                 <div className="w-40 h-[4px] bg-white rounded-full opacity-30"></div>
-                <Plane className="w-24 h-24 text-white fill-white -rotate-45" />
+                <Plane className="w-24 h-24 text-white fill-white rotate-90" />
               </div>
               <img 
                 src="/images/Logo.png" 
@@ -124,43 +124,51 @@ export default function Home() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-8xl font-black uppercase italic flex flex-col gap-4 md:gap-8"
+              className="text-5xl md:text-8xl font-black uppercase italic flex flex-col gap-2 md:gap-4"
             >
               {/* Line 1: HÀNH TRÌNH MÙA HÈ */}
-              <div className="flex flex-wrap text-charcoal leading-[1.1]">
-                {"HÀNH TRÌNH MÙA HÈ".split("").map((char, i) => (
-                  <motion.span
-                    key={i}
-                    whileHover={{ 
-                      y: -15, 
-                      rotate: i % 2 === 0 ? 5 : -5,
-                      color: "#f49d25"
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    className="inline-block cursor-default"
-                    style={{ marginRight: char === " " ? "0.3em" : "0" }}
-                  >
-                    {char}
-                  </motion.span>
+              <div className="flex flex-wrap text-charcoal leading-[1.2]">
+                {"HÀNH TRÌNH MÙA HÈ".split(" ").map((word, wordIdx, words) => (
+                  <span key={wordIdx} className="inline-flex whitespace-nowrap">
+                    {word.split("").map((char, i) => (
+                      <motion.span
+                        key={i}
+                        whileHover={{ 
+                          y: -15, 
+                          rotate: i % 2 === 0 ? 5 : -5,
+                          color: "#f49d25"
+                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        className="inline-block cursor-default"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                    {wordIdx < words.length - 1 && <span className="w-[0.3em]"></span>}
+                  </span>
                 ))}
               </div>
 
               {/* Line 2: CHÂN ÁI */}
-              <div className="flex flex-wrap text-primary leading-[1.1]">
-                {"CHÂN ÁI".split("").map((char, i) => (
-                  <motion.span
-                    key={i}
-                    whileHover={{ 
-                      y: -15, 
-                      rotate: i % 2 === 0 ? -5 : 5,
-                      color: "#181511"
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    className="inline-block cursor-default"
-                    style={{ marginRight: char === " " ? "0.3em" : "0" }}
-                  >
-                    {char}
-                  </motion.span>
+              <div className="flex flex-wrap text-primary leading-[1.2]">
+                {"CHÂN ÁI".split(" ").map((word, wordIdx, words) => (
+                  <span key={wordIdx} className="inline-flex whitespace-nowrap">
+                    {word.split("").map((char, i) => (
+                      <motion.span
+                        key={i}
+                        whileHover={{ 
+                          y: -15, 
+                          rotate: i % 2 === 0 ? -5 : 5,
+                          color: "#181511"
+                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        className="inline-block cursor-default"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                    {wordIdx < words.length - 1 && <span className="w-[0.3em]"></span>}
+                  </span>
                 ))}
               </div>
             </motion.h1>
