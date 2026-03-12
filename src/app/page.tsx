@@ -58,13 +58,20 @@ export default function Home() {
             className="fixed inset-0 z-[100] bg-primary flex items-center justify-center pointer-events-none"
           >
             <motion.div
-              initial={{ x: '-150%' }}
-              animate={{ x: '150%' }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="flex items-center gap-4"
+              initial={{ x: '-150%', y: '50%' }}
+              animate={{ x: '150%', y: '-50%' }}
+              transition={{ duration: 1.8, ease: "easeInOut" }}
+              className="flex flex-col items-center gap-6"
             >
-              <div className="w-40 h-[4px] bg-white rounded-full opacity-50"></div>
-              <Plane className="w-20 h-20 text-white fill-white rotate-90" />
+              <div className="flex items-center gap-4">
+                <div className="w-40 h-[4px] bg-white rounded-full opacity-30"></div>
+                <Plane className="w-24 h-24 text-white fill-white -rotate-45" />
+              </div>
+              <img 
+                src="/images/Logo.png" 
+                alt="Inno Logo" 
+                className="h-12 w-auto object-contain brightness-0 invert opacity-80" 
+              />
             </motion.div>
           </motion.div>
         )}
@@ -117,26 +124,29 @@ export default function Home() {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-8xl font-black leading-[0.85] tracking-tighter text-charcoal uppercase italic flex flex-wrap"
+              className="text-5xl md:text-8xl font-black uppercase italic flex flex-col gap-4 md:gap-8"
             >
-              {/* Wavy Title Effect */}
-              {"HÀNH TRÌNH MÙA HÈ".split("").map((char, i) => (
-                <motion.span
-                  key={i}
-                  whileHover={{ 
-                    y: -15, 
-                    rotate: i % 2 === 0 ? 5 : -5,
-                    color: "#f49d25"
-                  }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  className="inline-block cursor-default"
-                  style={{ marginRight: char === " " ? "0.3em" : "0" }}
-                >
-                  {char}
-                </motion.span>
-              ))}
-              <br/> 
-              <span className="text-primary flex flex-wrap">
+              {/* Line 1: HÀNH TRÌNH MÙA HÈ */}
+              <div className="flex flex-wrap text-charcoal leading-[1.1]">
+                {"HÀNH TRÌNH MÙA HÈ".split("").map((char, i) => (
+                  <motion.span
+                    key={i}
+                    whileHover={{ 
+                      y: -15, 
+                      rotate: i % 2 === 0 ? 5 : -5,
+                      color: "#f49d25"
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    className="inline-block cursor-default"
+                    style={{ marginRight: char === " " ? "0.3em" : "0" }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </div>
+
+              {/* Line 2: CHÂN ÁI */}
+              <div className="flex flex-wrap text-primary leading-[1.1]">
                 {"CHÂN ÁI".split("").map((char, i) => (
                   <motion.span
                     key={i}
@@ -152,7 +162,7 @@ export default function Home() {
                     {char}
                   </motion.span>
                 ))}
-              </span>
+              </div>
             </motion.h1>
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
