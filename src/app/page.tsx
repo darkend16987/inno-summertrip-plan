@@ -44,10 +44,12 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b-4 border-charcoal px-6 md:px-12 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            {/* Logo Placeholder */}
-            <div className="w-12 h-12 bg-primary rounded-lg border-2 border-charcoal flex items-center justify-center neo-shadow">
-              <span className="font-black text-xl">I</span>
-            </div>
+            {/* Company Logo */}
+            <img
+              src="/images/logo.png"
+              alt="Inno Logo"
+              className="h-12 w-auto object-contain"
+            />
             <div>
               <h1 className="text-xl font-black tracking-tighter uppercase italic leading-none">
                 INNO <span className="text-primary">TRIP</span>
