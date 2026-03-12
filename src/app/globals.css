@@ -1,41 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --background: #f8f7f5;
-  --foreground: #1a1a1a;
+@theme {
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", sans-serif;
+  
+  --color-primary: #f49d25;
+  --color-accent-red: #ef4444;
+  --color-bg-light: #f8f7f5;
+  --color-charcoal: #1a1a1a;
+  
+  --shadow-neo: 4px 4px 0px 0px #1a1a1a;
+  --shadow-neo-lg: 8px 8px 0px 0px #1a1a1a;
+  --shadow-neo-xl: 12px 12px 0px 0px #1a1a1a;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: 'Be Vietnam Pro', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  body {
+    @apply bg-bg-light text-charcoal antialiased;
+  }
 }
 
-h1, h2, h3, h4, .font-display {
-  font-family: 'Montserrat', sans-serif;
-}
+@layer components {
+  .neo-border {
+    @apply border-3 border-charcoal;
+  }
 
-.neo-shadow {
-  box-shadow: 4px 4px 0px 0px #1a1a1a;
-}
+  .neo-shadow {
+    box-shadow: var(--shadow-neo);
+  }
 
-.neo-shadow-lg {
-  box-shadow: 8px 8px 0px 0px #1a1a1a;
-}
+  .neo-shadow-lg {
+    box-shadow: var(--shadow-neo-lg);
+  }
 
-.neo-shadow-xl {
-  box-shadow: 12px 12px 0px 0px #1a1a1a;
-}
+  .neo-shadow-xl {
+    box-shadow: var(--shadow-neo-xl);
+  }
 
-.neo-border {
-  border: 3px solid #1a1a1a;
+  .neo-shadow-hover:hover {
+    box-shadow: 6px 6px 0px 0px #1a1a1a;
+    transform: translate(-2px, -2px);
+  }
+  
+  .font-display {
+    font-family: var(--font-display);
+  }
 }
 
 @keyframes fadeInUp {
