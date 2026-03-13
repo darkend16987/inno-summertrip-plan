@@ -23,6 +23,8 @@ import { TRIPS, Trip } from '@/constants/trips';
 export default function Home() {
   const [budgetFilter, setBudgetFilter] = useState<'all' | 'under10' | '10-15' | 'over15'>('all');
   const [monthFilter, setMonthFilter] = useState<number | 'all'>('all');
+  const [destinationFilter, setDestinationFilter] = useState<'all' | 'domestic' | 'international'>('all');
+  const [sortOrder, setSortOrder] = useState<'early' | 'late' | 'cheap' | 'expensive'>('early');
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,20 +34,32 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  const filteredTrips = TRIPS.filter(trip => {
-    const matchesSearch = trip.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         trip.team.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         trip.location.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    let matchesBudget = true;
-    if (budgetFilter === 'under10') matchesBudget = trip.budgetVal < 10;
-    if (budgetFilter === '10-15') matchesBudget = trip.budgetVal >= 10 && trip.budgetVal <= 15;
-    if (budgetFilter === 'over15') matchesBudget = trip.budgetVal > 15;
+  const filteredTrips = TRIPS
+    .filter(trip => {
+      const matchesSearch = trip.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                           trip.team.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           trip.location.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      let matchesBudget = true;
+      if (budgetFilter === 'under10') matchesBudget = trip.budgetVal < 10;
+      if (budgetFilter === '10-15') matchesBudget = trip.budgetVal >= 10 && trip.budgetVal <= 15;
+      if (budgetFilter === 'over15') matchesBudget = trip.budgetVal > 15;
 
-    const matchesMonth = monthFilter === 'all' || trip.month === monthFilter;
-                         
-    return matchesSearch && matchesBudget && matchesMonth;
-  });
+      const matchesMonth = monthFilter === 'all' || trip.month === monthFilter;
+      
+      const matchesDestination = destinationFilter === 'all' || 
+                               (destinationFilter === 'domestic' && !trip.isInternational) ||
+                               (destinationFilter === 'international' && trip.isInternational);
+                           
+      return matchesSearch && matchesBudget && matchesMonth && matchesDestination;
+    })
+    .sort((a, b) => {
+      if (sortOrder === 'early') return a.month - b.month;
+      if (sortOrder === 'late') return b.month - a.month;
+      if (sortOrder === 'cheap') return a.budgetVal - b.budgetVal;
+      if (sortOrder === 'expensive') return b.budgetVal - a.budgetVal;
+      return 0;
+    });
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-bg-light relative overflow-hidden">
@@ -222,6 +236,27 @@ export default function Home() {
           <div className="bg-white border-4 border-charcoal p-4 rounded-xl flex flex-wrap items-center justify-between gap-6 poster-shadow">
             <div className="flex flex-wrap items-center gap-6">
               <div className="flex items-center gap-3">
+                <span className="font-black uppercase text-[10px] tracking-widest text-charcoal/40">Địa điểm</span>
+                <div className="flex bg-bg-light p-0.5 rounded-lg border-2 border-charcoal">
+                  {[
+                    { id: 'all', label: 'Tất cả' },
+                    { id: 'domestic', label: 'Việt Nam' },
+                    { id: 'international', label: 'Nước ngoài' }
+                  ].map((btn) => (
+                    <button 
+                      key={btn.id}
+                      onClick={() => setDestinationFilter(btn.id as any)}
+                      className={`px-3 py-1 rounded-md text-[10px] font-black transition-all cursor-pointer ${destinationFilter === btn.id ? 'bg-primary text-charcoal' : 'text-charcoal/40'}`}
+                    >
+                      {btn.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="h-6 w-[2px] bg-charcoal/10 hidden md:block"></div>
+
+              <div className="flex items-center gap-3">
                 <span className="font-black uppercase text-[10px] tracking-widest text-charcoal/40">Ngân sách</span>
                 <div className="flex bg-bg-light p-0.5 rounded-lg border-2 border-charcoal">
                   {[
@@ -241,7 +276,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="h-6 w-[2px] bg-charcoal/10 hidden md:block"></div>
+              <div className="h-6 w-[2px] bg-charcoal/10 hidden lg:block"></div>
 
               <div className="flex items-center gap-3">
                 <span className="font-black uppercase text-[10px] tracking-widest text-charcoal/40">Tháng</span>
@@ -259,10 +294,30 @@ export default function Home() {
               </div>
             </div>
 
-            <button className="flex items-center gap-2 text-charcoal font-black hover:text-primary transition-colors cursor-pointer group">
-              <SlidersHorizontal className="w-4 h-4 group-hover:rotate-180 transition-transform" />
-              <span className="uppercase tracking-widest text-[10px]">Lọc thêm</span>
-            </button>
+            <div className="relative group/sort">
+              <button className="flex items-center gap-2 text-charcoal font-black hover:text-primary transition-colors cursor-pointer group">
+                <SlidersHorizontal className="w-4 h-4 group-hover:rotate-180 transition-transform" />
+                <span className="uppercase tracking-widest text-[10px]">Sắp xếp</span>
+              </button>
+              
+              <div className="absolute right-0 top-full mt-2 w-48 bg-white border-4 border-charcoal rounded-xl shadow-[8px_8px_0px_0px_#181511] opacity-0 invisible group-hover/sort:opacity-100 group-hover/sort:visible transition-all z-50 overflow-hidden">
+                {[
+                  { id: 'early', label: 'Thời gian: Sớm nhất', icon: Calendar },
+                  { id: 'late', label: 'Thời gian: Muộn nhất', icon: Calendar },
+                  { id: 'cheap', label: 'Budget: Ít nhất', icon: Wallet },
+                  { id: 'expensive', label: 'Budget: Nhiều nhất', icon: Wallet }
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => setSortOrder(item.id as any)}
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-[10px] font-black uppercase text-left hover:bg-primary transition-colors border-b-2 last:border-b-0 border-charcoal/5 ${sortOrder === item.id ? 'bg-primary/20' : ''}`}
+                  >
+                    <item.icon className="w-3 h-3" />
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
