@@ -41,8 +41,8 @@ export default function Home() {
                            trip.location.toLowerCase().includes(searchTerm.toLowerCase());
       
       let matchesBudget = true;
-      if (budgetFilter === 'under10') matchesBudget = trip.budgetVal < 10;
-      if (budgetFilter === '10-15') matchesBudget = trip.budgetVal >= 10 && trip.budgetVal <= 15;
+      if (budgetFilter === 'under10') matchesBudget = trip.budgetVal <= 10;
+      if (budgetFilter === '10-15') matchesBudget = trip.budgetVal > 10 && trip.budgetVal <= 15;
       if (budgetFilter === 'over15') matchesBudget = trip.budgetVal > 15;
 
       const matchesMonth = monthFilter === 'all' || trip.month === monthFilter;
@@ -261,7 +261,7 @@ export default function Home() {
                 <div className="flex bg-bg-light p-0.5 rounded-lg border-2 border-charcoal">
                   {[
                     { id: 'all', label: 'Tất cả' },
-                    { id: 'under10', label: '< 10' },
+                    { id: 'under10', label: '<= 10' },
                     { id: '10-15', label: '10-15' },
                     { id: 'over15', label: '> 15' }
                   ].map((btn) => (
