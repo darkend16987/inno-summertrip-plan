@@ -1,9 +1,9 @@
-import { 
-  Users, 
-  Compass, 
-  Anchor, 
-  Palette, 
-  Music, 
+﻿import {
+  Users,
+  Compass,
+  Anchor,
+  Palette,
+  Music,
   Mountain,
   Wine,
   Camera,
@@ -114,6 +114,7 @@ export const TRIPS: Trip[] = [
     month: 5,
     budgetVal: 10,
     budgetLabel: '10 củ',
+    itineraryUrl: 'https://tourculaocham.net/150-tour-da-nang-hoi-an-ly-son-5-ngay-4-dem.html',
     description: 'Nghỉ dưỡng mùa hè chuẩn mực: Đà Nẵng năng động, phố cổ Hội An duyên dáng, rồi vượt sóng ra Lý Sơn — đảo Tỏi đẹp như trong mơ. Đảm bảo 10 củ chơi nhòe 🏝️. Ai thấy hợp thì ghép cùng team nhé!',
     image: '/images/Lý Sơn.webp',
     badge: 'ISLAND VIBE',
