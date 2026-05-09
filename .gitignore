@@ -1,5 +1,9 @@
 # dependencies
 /node_modules
+
+# Lock files - project uses pnpm (pnpm-lock.yaml), ignore npm/yarn locks
+package-lock.json
+yarn.lock
 /.pnp
 .pnp.js
 
